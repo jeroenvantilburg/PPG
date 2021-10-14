@@ -1,34 +1,27 @@
 import matplotlib.pyplot as plt
-
 import numpy as np
-from math import *
 
+# Create a numpy array of 400 entries with a sinus
 x = np.linspace(0, 7, 400)
 y = np.sin(2*pi*0.882*x)
 
-fig = plt.figure()
-plt.plot(x, y)
+fig, ax = plt.subplots()
+ax.plot(x, y)
 
-plt.xlabel("tijd (ms)", loc='right')
-plt.ylabel("u (mV)", loc='top')
+# Set the axes
+ax.set_xlim([0, 8.1])
+ax.set_xlabel("tijd (ms)", loc='right', fontsize=14)
+ax.set_ylabel("u (mV)", loc='top', fontsize=14)
 
-plt.minorticks_on()
-plt.grid(which='major')
+# Show the minor ticks and the major grid
+ax.minorticks_on()
+ax.grid(which='major')
 
-ax = fig.add_subplot(1, 1, 1)
-
-# Move left y-axis and bottim x-axis to centre, passing through (0,0)
-#ax.spines['left'].set_position('center')
+# Move bottom x-axis to centre, passing through (0,0)
 ax.spines['bottom'].set_position('center')
 
 # Eliminate upper and right axes
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
-
-# Show ticks in the left and lower axes only
-ax.xaxis.set_ticks_position('bottom')
-ax.yaxis.set_ticks_position('left')
-
-ax.set_xlim([0, 7.8])
 
 plt.show()
