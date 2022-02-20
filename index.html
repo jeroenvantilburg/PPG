@@ -5,6 +5,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css">
   <style>
+
+/* General settings */
+html, body {
+  height: 100%;
+  /*overflow: hidden;*/ /* TODO: check if this can be removed now */
+  font: 100% arial,sans-serif;
+  margin: 0;
+  -webkit-text-size-adjust: 100%; /* prevent scaling in landscape modus */
+}
+
+/* Include padding and border in total width */
+body * {
+  box-sizing: border-box;
+}
+
   .CodeMirror {
     border: 1px solid #eee;
     height: 500px;
@@ -45,7 +60,7 @@
 
 .modal-large {
   max-width: initial;
-  height: 90vh;
+  /*height: 90vh;*/
 }
 
 /* The Close Button */
@@ -82,7 +97,8 @@
 
 .box-item:hover {
   cursor: pointer;
-  padding: 9px; 
+  padding: 10px;
+  margin: 20px; 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -139,11 +155,10 @@
         <img src="gallery/decay.png" width="100%"/>         
       </div>
 
-      <div class="box-item" href="#rate.py">
-        <h3>Rate vs angle</h3>
-        <img src="gallery/rate.png" width="100%"/>         
+      <div class="box-item" href="#planck.py">
+        <h3>Planck curves</h3>
+        <img src="gallery/planck.png" width="100%"/>         
       </div>
-
     </div>
   </div>
 
