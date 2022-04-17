@@ -127,17 +127,19 @@ from js import document
 
   // Initialize Pyodide
   const output = document.getElementById("output");
-  output.value = 'Initializing...\n';
+  output.value = 'Initializing... Please wait... \n';
   async function main(){
     await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
     await pyodide.runPythonAsync( startupCode );
-      
+    
     output.value += 'Ready!\n';
+    $("#runCode").removeAttr('disabled');
   }
   let pyodideReadyPromise = main();
 
   // Evaluate the python user code
   async function evaluatePython() {
+    output.value = "Processing script...";
     await pyodideReadyPromise;
     try {
       let output = await pyodide.runPythonAsync( myCodeMirror.getValue() );
