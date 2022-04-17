@@ -1,6 +1,7 @@
 # Open this file with jeroenvantilburg.nl/ppg or any python environment
 import matplotlib.pyplot as plt # do not modify; required by ppg
 import numpy as np
+from math import *
 
 # Create a numpy array of 400 entries with a sinus
 x = np.linspace(0, 7, 400)
