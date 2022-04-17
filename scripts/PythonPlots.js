@@ -1,6 +1,7 @@
 // All code runs in this anonymous function
 // to avoid cluttering the global variables
 (function() {
+
   // python code to run at startup
   let startupCode = `
 import sys, io
@@ -20,6 +21,14 @@ from js import document
     lineNumbers: true
   } );
 
+  // Minimal script requirements
+  let requiredLines = [
+    "# Open this file with jeroenvantilburg.nl/ppg or any python environment",
+    "import matplotlib.pyplot as plt",
+    "plt.show()" ] ;
+  let markOptions = { css: "opacity: 0.5;", readOnly: true, inclusiveLeft: true };
+
+  // Run the script when user clicks on Run button
   $("#runCode").click( evaluatePython );
 
   // Read the xml file from the hash of the web address
@@ -47,7 +56,7 @@ from js import document
   // Trigger reload when hash has changed
   $(window).on('hashchange', readFileFromHash );
 
-  // Call function from select menu
+  // Call function from gallery menu
   function loadHash( hash ) {
     // Force a reload when hash did not change
     if( hash == window.location.hash ) {
@@ -57,23 +66,19 @@ from js import document
     }
   }
 
+  // When user selects script from gallery: load the hash
   $(".box-item").on("click", function() {
     loadHash( $(this).attr('href') );
     $(".close").click();
   });
 
-
+  // Get the line number from a text string
   function getLineNumber( str, line ) {
     let i = str.indexOf(line);
     return (i<0) ? -1 : str.substring(0, i).split('\n').length-1;
   }
 
-  let requiredLines = [
-    "# Open this file with jeroenvantilburg.nl/ppg or any python environment",
-    "import matplotlib.pyplot as plt",
-    "plt.show()" ] ;
-  let markOptions = { css: "opacity: 0.5;", readOnly: true, inclusiveLeft: true };
-  
+  // Load the script
   function loadScript( url = "gallery/sine.py" ) {
     // Get the file using jQuery get method
     $.get(url, function( code ) { 
@@ -105,16 +110,17 @@ from js import document
     this.value = '';
   });
 
+  // When user click on Download script
   $("#download").click( function(){
     var filename = prompt("Download as...", "charts.py");
     if (filename != null && filename != "") {
       console.log("filename="+filename);
       let url = 'data:text/plain;charset=utf-8,' + encodeURIComponent( myCodeMirror.getValue() ) ;
-      //console.log(url);
       downloadURL( url, filename );
     }
   });
 
+  // Make a downloadable element
   function downloadURL( url, fileName ) {
     var link = document.createElement("a");
     document.body.appendChild(link); // for Firefox
@@ -123,8 +129,7 @@ from js import document
     link.click();
     document.body.removeChild(link);
   }
-    
-
+  
   // Initialize Pyodide
   const output = document.getElementById("output");
   output.value = 'Initializing... Please wait... \n';
@@ -139,11 +144,12 @@ from js import document
 
   // Evaluate the python user code
   async function evaluatePython() {
-    output.value = "Processing script...";
+    output.value = "Processing script...\n";
     await pyodideReadyPromise;
     try {
-      let output = await pyodide.runPythonAsync( myCodeMirror.getValue() );
-      addToOutput(output);
+      let pythonOutput = await pyodide.runPythonAsync( myCodeMirror.getValue() );
+      output.value += "Done!\n";
+      addToOutput( pythonOutput );
       showFigure();
     } catch(err) {
       addToOutput(err);
