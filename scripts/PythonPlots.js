@@ -131,12 +131,13 @@ from js import document
   }
   
   // Initialize Pyodide
+  let pyodide;
   const output = document.getElementById("output");
   output.value = 'Initializing... Please wait... \n';
   async function main(){
-    await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
+    pyodide = await loadPyodide();
+    await pyodide.loadPackage("matplotlib");
     await pyodide.runPythonAsync( startupCode );
-    
     output.value += 'Ready!\n';
     $("#runCode").removeAttr('disabled');
   }
