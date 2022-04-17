@@ -1,5 +1,6 @@
+# Open this file with jeroenvantilburg.nl/ppg or any python environment
+import matplotlib.pyplot as plt # do not modify; required by ppg
 import numpy as np
-import matplotlib.pyplot as plt
 from math import *
 
 def planckCurve(lam, T, I):
@@ -38,4 +39,4 @@ ax.yaxis.set_minor_locator(ticker.MultipleLocator(25))
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
 
-plt.show()
+plt.show() # last line; do not modify; required by ppg

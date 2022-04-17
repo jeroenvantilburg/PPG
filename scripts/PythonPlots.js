@@ -1,5 +1,3 @@
-// License
-
 // All code runs in this anonymous function
 // to avoid cluttering the global variables
 (function() {
@@ -65,11 +63,31 @@ from js import document
   });
 
 
+  function getLineNumber( str, line ) {
+    let i = str.indexOf(line);
+    return (i<0) ? -1 : str.substring(0, i).split('\n').length-1;
+  }
 
+  let requiredLines = [
+    "# Open this file with jeroenvantilburg.nl/ppg or any python environment",
+    "import matplotlib.pyplot as plt",
+    "plt.show()" ] ;
+  let markOptions = { css: "opacity: 0.5;", readOnly: true, inclusiveLeft: true };
+  
   function loadScript( url = "gallery/sine.py" ) {
     // Get the file using jQuery get method
     $.get(url, function( code ) { 
       myCodeMirror.setValue( code );
+      
+      // Mark the required lines and make them readOnly
+      requiredLines.forEach(line => {
+        lineNumber = getLineNumber( code, line );
+        if( lineNumber >= 0 ) {
+          let start = {line: lineNumber , ch: 0};
+          let end = {line:lineNumber+1, ch:0};
+          myCodeMirror.markText(start, end, markOptions);
+        }
+      });  
     });
   }
 

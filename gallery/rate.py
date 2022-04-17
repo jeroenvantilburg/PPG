@@ -1,5 +1,6 @@
+# Open this file with jeroenvantilburg.nl/ppg or any python environment
+import matplotlib.pyplot as plt # do not modify; required by ppg
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Data points with individual y-errors
 x = [0, 22.5, 45, 67.5, 90 ]
@@ -30,4 +31,5 @@ ax.grid(which='minor', color="grey", alpha=0.5, lw=0.4)
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
 
-plt.show()
+plt.show() # last line; do not modify; required by ppg
+

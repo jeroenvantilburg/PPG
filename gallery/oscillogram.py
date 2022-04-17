@@ -1,4 +1,5 @@
-import matplotlib.pyplot as plt
+# Open this file with jeroenvantilburg.nl/ppg or any python environment
+import matplotlib.pyplot as plt # do not modify; required by ppg
 import numpy as np
 
 # Create a numpy array of 400 entries with a sinus
@@ -24,4 +25,4 @@ ax.spines['bottom'].set_position('center')
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
 
-plt.show()
+plt.show() # last line; do not modify; required by ppg

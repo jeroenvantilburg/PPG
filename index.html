@@ -4,105 +4,8 @@
     <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css">
-  <style>
-
-/* General settings */
-html, body {
-  height: 100%;
-  /*overflow: hidden;*/ /* TODO: check if this can be removed now */
-  font: 100% arial,sans-serif;
-  margin: 0;
-  -webkit-text-size-adjust: 100%; /* prevent scaling in landscape modus */
-}
-
-/* Include padding and border in total width */
-body * {
-  box-sizing: border-box;
-}
-
-  .CodeMirror {
-    border: 1px solid #eee;
-    height: 500px;
-    font-size: 12px;
-  }
-  #wrapper{ width: 100%; display: flex; }
-  #codeEditor{ width: 50%; } 
-  #pyplotdiv{ width: 50%; }
-
-/* https://www.w3schools.com/howto/howto_css_modals.asp */
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 3; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto; /* 15% from the top and centered */
-  padding: 10px;
-  max-width: 700px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-.modal-small {
-  max-width: 400px;
-}
-
-.modal-large {
-  max-width: initial;
-  /*height: 90vh;*/
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  margin-right: 10px;
-  font-size: 2.5em;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Boxes for the Gallery */
-.box-item {
-  background-color: white;
-  float: left;
-  margin: 20px;
-  padding: 10px; 
-  max-width: 200px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.boxes:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.box-item:hover {
-  cursor: pointer;
-  padding: 10px;
-  margin: 20px; 
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen,projecti
+on" />
   <link rel="stylesheet" 
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
@@ -113,7 +16,7 @@ body * {
     <div id="codeEditor">
       <p>
       <button id="runCode">Run</button>
-      <input id="fileinput" type="file" style="display: none;">
+      <input id="fileinput" type="file" accept=".py" style="display: none;">
       <button id="stupid_hack" onclick="fileinput.click()">Upload script</button>
       <button id="download">Download script</button>
       <button id="gallery">Gallery</button>
