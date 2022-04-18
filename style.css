@@ -12,14 +12,27 @@ body * {
   box-sizing: border-box;
 }
 
-  .CodeMirror {
+pre {
+  display: inline;
+  margin: 0;
+  font-family: "Courier New",Courier,Arial,Verdana;
+}
+/*ul {list-style-position: inside; }
+li {text-indent: -1em; }
+*/
+ul, ol {
+  margin: 0px;
+}
+
+
+.CodeMirror {
     border: 1px solid #eee;
     height: 500px;
     font-size: 12px;
-  }
-  #wrapper{ width: 100%; display: flex; }
-  #codeEditor{ width: 50%; } 
-  #pyplotdiv{ width: 50%; }
+}
+#wrapper{ width: 100%; display: flex; }
+#codeEditor{ width: 50%; } 
+#pyplotdiv{ width: 50%; }
 
 /* https://www.w3schools.com/howto/howto_css_modals.asp */
 /* The Modal (background) */

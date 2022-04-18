@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css" media="screen,projecti
-on" />
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css"/>
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen,projection"/>
   <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/python/python.min.js"></script>
 </head>
 
 <body>
@@ -20,6 +19,7 @@ on" />
       <button id="stupid_hack" onclick="fileinput.click()">Upload script</button>
       <button id="download">Download script</button>
       <button id="gallery">Gallery</button>
+      <button id="showHelp">Help</button>
       </p>
     </div>
     <div id="pyplotdiv">
@@ -64,7 +64,110 @@ on" />
       </div>
     </div>
   </div>
+  </div>
 
+  <div id="helpModal" class="modal">
+    <div class="modal-content modal-large"> <span class="close">&times;</span>
+      <h2>Help</h2>
+      <b>General</b><br/>
+      Physics Plot Gallery (PPG) is a simple HTML5 javascript-application for running 
+      <a href="https://matplotlib.org">matplotlib</a> scripts in the browser.
+      The purpose of PPG is to provide a gallery where matplotlib scripts are stored that can
+      be easily modified and shown in physics classes. Of course these scripts also run 
+      in any <a href="https://www.python.org">Python</a> environment
+      where matplotlib is installed. The complete gallery can be 
+      <a href="https://github.com/jeroenvantilburg/ppg/archive/refs/heads/main.zip">downloaded</a>
+      from GitHub as a zip-file.
+      <br/><br/>
+
+      <b>Getting started</b><br/>
+      <ul>
+        <li>Select a convenient graph from the gallery.</li>
+        <li>Modify the Python script to your needs.</li>
+        <li>Press Run to execute the script.</li>
+        <li>Download the graph in pdf, png or svg format.</li>
+        <li>Do not forget to save your script using <pre>Download script</pre> button.</li>
+        <li>Next time you can upload your script directly.</li>
+        <li>Do you have a nice matplotlib script? Send it to me.</li>
+      </ul>
+      <br/>
+
+      <b>Hash link</b><br>
+      When you have your own matplotlib scripts on a webserver (e.g. on GitHub), you can
+      open this script directly on PPG with a direct link using the hash function. This way
+      you can easily share your script with others. The direct link would be for instance:<br/>
+      <pre>   https://jeroenvantilburg.nl/ppg/#https://www.example.com/test.py</pre><br/>
+      Keep in mind that you teh webserver has to set
+      <pre>Access-Control-Allow-Origin</pre> due to the CORS-policy on most browsers.
+      You can also host your python scripts on your own Github Pages when you have a 
+      <a href="https://github.com">Github account</a>. This way you will bypass any 
+      CORS restriction. The direct link would then be:
+      <pre>   https://jeroenvantilburg.nl/ppg/#https://myname.github.io/myproject/test.py</pre><br/>
+      <br/>
+
+      <b>Technology</b><br/>
+      The Python script is interpreted by the <a href="https://pyodide.org">Pyodide</a> engine. 
+      Pyodide is a Python distribution for the browser which is built using the 
+      WebAssembly/<a href="https://emscripten.org">Emscripten</a> compiler. This means that 
+      the full Python interpreter runs directly (locally) in the
+      browser.<br/>
+      The main drawback of running Python through the browser is the
+      lack of a generic graphical backend. This means that any graphical output has to be
+      fetched from the Pyodide side and placed on the website when the Python script has finished.
+      For this reason PPG puts some minimal requirements on the Python scripts. Namely that 
+      each script has to start with <pre>import matplotlib.pyplot as plt</pre> and end 
+      with <pre>plt.show()</pre>.
+      <br/><br/>
+      
+      <b>Security/privacy</b><br/>
+      No data leaves your computer by using this website. All analysis is done locally on your own
+      computer. This is a cookie-free website.
+      <br/><br/>
+
+      <b>Webapp compatibility</b><br/>
+      PPG does not run yet on all mobile devices. PPG does not work in Internet Explorer. 
+      In case you are still using IE, please 
+      consider moving to a modern browser like Chrome, Edge, Firefox or Safari.
+      <br/><br/>
+
+      <b>Source code</b><br>
+      The source code from this website is freely available on 
+      <a href="https://github.com/jeroenvantilburg/ppg">GitHub</a> under the free
+      <a href="https://unlicense.org">Unlicense</a>. The source code
+      may be freely copied and hosted on every web server. Please make sure to keep the code
+      up-to-date since new updates and bug fixes may come out.
+      <br/><br/>
+
+      <b>Feedback and questions</b><br/>
+      To keep this website as user-friendly as possible I depend on your feedback. Please send your
+      questions, improvements, bug reports, suggestions, comments and compliments 
+      to <feedback></feedback>. 
+      <br/><br> 
+      
+      <b>Acknowledgments</b><br/>
+      Many thanks to <a href="https://github.com">GitHub</a> and 
+      <a href="https://pages.github.com">GitHub Pages</a> for hosting PPG.
+      PPG depends on the following useful javascript libraries:
+      <ul>
+        <li><a href="https://pyodide.org">Pyodide</a>: Python interpreter in the browser</li>
+        <li><a href="https://codemirror.net">CodeMirror</a>: Python syntax highlighting</li>
+        <li><a href="https://jquery.com">jQuery</a>: DOM manipulation</li>
+      </ul>
+      <br/>
+
+      <b>Other applications</b><br/>
+      Besides PPG, there are a number of other, third-party applications that can be used 
+      to run Matplotlib scripts. Select the application that suits your needs.
+      <ul>
+        <li><a href="https://alpha.iodide.io">Iodide</a> is a notebook-like environment for 
+          literate scientific computing and communication for the web. It is no longer actively 
+          maintained. Historically, Pyodide started as plugin for iodide.</li>
+        <li><a href="https://jupyterlite.rtfd.io/en/latest/try/lab">JupyterLite</a> 
+          is a JupyterLab distribution that runs entirely in the browser, based on Pyodide.</li>
+      </ul>
+      
+    </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="scripts/PythonPlots.js"></script>

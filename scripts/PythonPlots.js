@@ -40,8 +40,8 @@ from js import document
       return;
     }
     else if ( pyFile.includes("https") ) {
+      console.log("Trying to load external python file");
       $.get(pyFile, function(data) {
-        console.log("Trying to load external python file");
         console.log(pyFile);
         console.log(data);
       });
@@ -197,8 +197,7 @@ from js import document
 
   // Event listener for the different modal boxes
   $("#gallery").click( evt => { showModal("galleryModal"); });
-  /*$("#showAbout").click( evt => { showModal("aboutModal"); } );
-  $("#showHelp").click( evt => { showModal("helpModal");} );*/
+  $("#showHelp").click( evt => { showModal("helpModal");} );
   
   // Showing modal box
   function showModal(name) { $("#"+name).toggle(); }
@@ -211,5 +210,17 @@ from js import document
     if( event.target.className === "modal" ) event.target.style.display = "none";
   });
 
+  // set the feedback tag
+  function setFeedback() {
+    var name = "smackjvantilburgsmack"; // add salt
+    name = name.substr(5,11); // remove salt
+    $("feedback").html(name+"@gmail.com");
+  }
+
+  // load all code after the document
+  $("document").ready(function(){
+    // Set the feedback tag
+    setFeedback();
+  });
           
 })();
