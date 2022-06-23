@@ -69,7 +69,7 @@ from js import document
   // When user selects script from gallery: load the hash
   $(".box-item").on("click", function() {
     loadHash( $(this).attr('href') );
-    $(".close").click();
+    $("#galleryModal").toggle(); // Close the gallery
   });
 
   // Get the line number from a text string
