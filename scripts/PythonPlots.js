@@ -110,22 +110,68 @@ from js import document
     this.value = '';
   });
 
+  let fileHandle;
+  
   // When user click on Download script
-  $("#download").click( function(){
-    var filename = prompt("Download as...", "charts.py");
-    if (filename != null && filename != "") {
-      console.log("filename="+filename);
-      let url = 'data:text/plain;charset=utf-8,' + encodeURIComponent( myCodeMirror.getValue() ) ;
-      downloadURL( url, filename );
+  document.getElementById("download").onclick = async () => {
+    let fileName = "charts.py";
+    let hashFile = window.location.hash.substr(1);
+    if( fileHandle ) fileName = fileHandle.name;
+    else if( hashFile != "" ) fileName = hashFile;
+    
+    if( window.showSaveFilePicker ) {
+      fileHandle = await window.showSaveFilePicker({
+        suggestedName: fileName,
+        startIn: fileHandle || "downloads",
+        types: [{
+          description: 'Python script',
+          accept: {
+            'text/plain': ['.py'],
+          },
+        }],
+      });
+     await writeFile( fileHandle, myCodeMirror.getValue() );
+    $("#save").removeAttr('disabled');      
+    } else { // legacy method
+      var newFilename = prompt("Download as...", fileName);
+      if (newFilename != null && newFilename != "") {
+        let url = 'data:text/plain;charset=utf-8,' + encodeURIComponent( myCodeMirror.getValue() ) ;
+        downloadURL( url, newFilename );
+      }
     }
-  });
+  }
 
+  // When user click on save button
+  document.getElementById("save").onclick = async () => {
+    await writeFile( fileHandle, myCodeMirror.getValue() );    
+  }
+
+  async function writeFile(fileHandle, contents) {
+    // Support for Chrome 82 and earlier.
+    if (fileHandle.createWriter) {
+      // Create a writer (request permission if necessary).
+      const writer = await fileHandle.createWriter();
+      // Write the full length of the contents
+      await writer.write(0, contents);
+      // Close the file and write the contents to disk
+      await writer.close();
+      return;
+    }
+    // For Chrome 83 and later.
+    // Create a FileSystemWritableFileStream to write to.
+    const writable = await fileHandle.createWritable();
+    // Write the contents of the file to the stream.
+    await writable.write(contents);
+    // Close the file and write the contents to disk.
+    await writable.close();
+  }
+  
   // Make a downloadable element
-  function downloadURL( url, fileName ) {
+  function downloadURL( url, newFileName ) {
     var link = document.createElement("a");
     document.body.appendChild(link); // for Firefox
     link.setAttribute("href", url);
-    link.setAttribute("download", fileName );
+    link.setAttribute("download", newFileName );
     link.click();
     document.body.removeChild(link);
   }
